@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <a th:href="@{/hello}">Hello</a><br/>
+        <a th:href="@{/hello01/{name}(name='zhangsan')}">Hello01</a><br/>
+        <a th:href="@{/employee}">employee</a><br/>
+    </div>
+    <div>
+        <ul th:each="employee : ${employees}">
+            <li th:text="${employee.id}"></li>
+            <li th:text="${employee.username}"></li>
+            <li th:text="${employee.password}"></li>
+        </ul>
+    </div>
+</body>
+</html>

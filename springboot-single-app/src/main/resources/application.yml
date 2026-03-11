@@ -1,0 +1,7 @@
+spring:
+  messages:
+    basename: "messages"
+    encoding: utf-8
+    fallback-to-system-locale: true
+  application:
+    name: springboot-single-app

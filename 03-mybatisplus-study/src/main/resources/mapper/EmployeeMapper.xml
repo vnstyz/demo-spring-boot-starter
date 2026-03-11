@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mybatisplusstudy.mapper.EmployeeMapper">
+
+    <resultMap id="epmAndDept" type="EmployeeVO">
+        <id property="id" column="id"/>
+        <result property="lastName" column="last_name"/>
+        <result property="email" column="email"/>
+        <result property="deptId" column="department"/>
+        <result property="gender" column="gender"/>
+        <result property="birth" column="birth"/>
+        <association property="department" javaType="Department">
+            <id property="id" column="did"/>
+            <result property="departmentName" column="department_name"/>
+        </association>
+    </resultMap>
+    <resultMap id="depsAndEmps" type="DepartmentVO">
+        <id property="id" column="id"/>
+        <result property="departmentName" column="department_name"/>
+        <collection property="emps" ofType="Employee">
+            <id property="id" column="eid"/>
+            <result property="lastName" column="last_name"/>
+            <result property="email" column="email"/>
+            <result property="deptId" column="department"/>
+            <result property="gender" column="gender"/>
+            <result property="birth" column="birth"/>
+        </collection>
+    </resultMap>
+
+    <select id="getEmpAndDeptByEmpId" resultMap="epmAndDept">
+        select e.id, e.last_name, e.email, e.department, e.gender, e.birth, d.id did, d.department_name
+        from springboot.employee e
+        left join springboot.department d
+        on e.department = d.id
+        where e.id = #{id}
+    </select>
+    <select id="getDeptAndEmps" resultMap="depsAndEmps">
+        select d.id, d.department_name, e.id eid, e.last_name, e.email, e.department, e.gender, e.birth
+        from springboot.department d
+        left join springboot.employee e
+        on d.id = e.department
+        where d.id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: jdbc-study
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  datasource:
+    druid:
+      username: root
+      password: life3145
+      url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.example.jdbcstudy.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+logging:
+  level:
+    org.example.jdbcstudy.mapper: DEBUG
+
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  page-size-zero: true
+  helper-dialect: mysql

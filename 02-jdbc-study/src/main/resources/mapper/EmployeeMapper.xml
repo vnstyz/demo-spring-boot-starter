@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.jdbcstudy.mapper.EmployeeMapper">
+    
+    <resultMap id="EmpWithDeptMap" type="Employee">
+        <id property="id" column="id"/>
+        <result property="lastName" column="last_name"/>
+        <result property="email" column="email"/>
+        <result property="gender" column="gender"/>
+        <result property="birth" column="birth"/>
+        <result property="department" column="department"/>
+        <association property="dept" javaType="Department">
+            <id property="id" column="did"/>
+            <result property="departmentName" column="department_name"/>
+        </association>
+    </resultMap>
+    
+    <resultMap id="DeptWithEmpsMap" type="Department">
+        <id property="id" column="id"/>
+        <result property="departmentName" column="department_name"/>
+        <collection property="emps" ofType="Employee">
+            <id property="id" column="eid"/>
+            <result property="lastName" column="last_name"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insertEmployee" keyProperty="id">
+        insert into springboot.employee(last_name, email, gender, department, birth)
+        values (#{lastName}, #{email}, #{gender}, #{department}, #{birth})
+    </insert>
+    <update id="updateEmployee">
+        update springboot.employee
+        set last_name = #{lastName}, email = #{email}, gender = #{gender}, department = #{department}, birth = #{birth}
+        where id = #{id}
+    </update>
+    <delete id="deleteEmployee">
+        delete from springboot.employee
+        where id = #{id}
+    </delete>
+
+    <select id="selectEmployeeById" resultType="Employee">
+        select * from springboot.employee
+        where id = #{id}
+    </select>
+    <select id="selectEmployeeLikeName" resultType="Employee">
+        select * from springboot.employee
+        where last_name LIKE concat('%', #{name}, '%')
+    </select>
+    <select id="getEmpsByCondition" resultType="Employee">
+        select * from springboot.employee
+        <where>
+            <if test="lastName != null and lastName != ''">
+                and last_name = #{lastName}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+    <select id="getEmpsByIds" resultType="Employee">
+        select *
+        from springboot.employee
+        where id
+        in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="getEmpAndDept" resultMap="EmpWithDeptMap">
+        select e.*, d.id did, d.department_name
+        from springboot.employee e
+        left join springboot.department d on e.department = d.id
+        where e.id = #{id}
+    </select>
+    <select id="getDeptAndEmps" resultMap="DeptWithEmpsMap">
+        select d.*, e.id eid, e.last_name
+        from springboot.department d
+        left join springboot.employee e on d.id = e.department
+        where d.id = #{id}
+    </select>
+
+</mapper>
