@@ -45,6 +45,7 @@ public class DeadLockTest {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.err.println("等待线程池终止时被中断");
+            System.out.println("断点");
         }
     }
 }
