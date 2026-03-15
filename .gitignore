@@ -1,6 +1,7 @@
 # IntelliJ IDEA
 .idea/
 *.iml
+application.yml
 
 # Maven / Gradle build
 **/target/
