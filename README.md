@@ -1,4 +1,4 @@
-﻿# demo-spring-boot-starter
+﻿# spring-boot-examples
 
 这是一个基于 Spring Boot 3.5.x 的多模块学习与实验仓库，覆盖自定义 Starter、JDBC、MyBatis/MyBatis-Plus、Spring MVC 与 Thymeleaf、Spring Cloud Gateway 等常见开发场景，方便在同一工程里对比与演练。
 
@@ -12,8 +12,6 @@
 - Spring Cloud Gateway
 - MySQL 驱动
 
-根聚合与依赖管理配置位于 `D:\Temp\demo-spring-boot-starter\pom.xml`。
-
 ## 模块清单
 
 - `diy-spring-boot-starter`：自定义 Starter 示例（对外暴露依赖与入口）。
@@ -25,11 +23,6 @@
 - `05-kuangstudy-thymeleaf`：Thymeleaf + MyBatis-Plus 示例。
 - `06-gateway-demo-to-5`：Spring Cloud Gateway 示例。
 - `DemoTest`：并发/基础测试类示例。
-
-下面两个目录存在于仓库中，但当前未加入根聚合模块列表，需单独构建或按需加入根 `pom.xml` 的 `<modules>`：
-
-- `jdbc-study`：JDBC + MyBatis-Plus 的基础示例。
-- `01-jdbc-study`：JDBC/MyBatis 入门练习。
 
 ## 运行方式
 
@@ -64,13 +57,10 @@ mvn spring-boot:run
 请根据你的本地 MySQL 账号、密码与库名进行调整。
 
 ## 目录结构
-
-- `.mvn`：Maven Wrapper 配置
 - `diy-spring-boot-starter`：自定义 Starter
 - `diy-spring-boot-starter-autoconfigure`：自动配置模块
 - `springboot-single-app`：单体应用示例
 - `jdbc-study`：JDBC/MyBatis-Plus 示例
-- `01-jdbc-study`：JDBC/MyBatis 基础
 - `02-jdbc-study`：JDBC/MyBatis 进阶
 - `03-mybatisplus-study`：MyBatis-Plus 示例
 - `04-springmvc-study`：Spring MVC + Thymeleaf 示例
