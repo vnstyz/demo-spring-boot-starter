@@ -1,0 +1,23 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+application.yml
+HELP.md
+.gitattributes
+
+# Maven / Gradle build
+**/target/
+**/build/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+.mvn/
+mvnw
+mvnw.cmd
