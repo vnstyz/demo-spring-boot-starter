@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: route1
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+      
+      default-filters:
+        - AddResponseHeader=X-Response-Time,#{T(java.time.LocalDateTime).now()}
+      
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+server:
+  port: 8086
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG

@@ -1,7 +1,6 @@
 # IntelliJ IDEA
 .idea/
 *.iml
-application.yml
 HELP.md
 .gitattributes
 

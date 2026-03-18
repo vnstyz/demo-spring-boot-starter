@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: diy-spring-boot-starter
+
+# 自定义 Starter 配置示例
+hello:
+  prefix: Hello
+  suffix: !
+
+server:
+  port: 8084
+
+logging:
+  level:
+    org.example.diyspringbootstarter: DEBUG
